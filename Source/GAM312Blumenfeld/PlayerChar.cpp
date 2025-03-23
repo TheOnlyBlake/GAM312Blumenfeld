@@ -18,6 +18,11 @@ APlayerChar::APlayerChar()
 	//turns camera with pawn.
 	PlayerCamComp->bUsePawnControlRotation = true;
 
+	ResourcesArray.SetNum(3);
+	ResourcesNameArray.Add(TEXT("Wood"));
+	ResourcesNameArray.Add(TEXT("Stone"));
+	ResourcesNameArray.Add(TEXT("Berry"));
+
 }
 
 // Called when the game starts or when spawned
