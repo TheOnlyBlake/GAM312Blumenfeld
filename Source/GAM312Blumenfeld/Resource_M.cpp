@@ -25,6 +25,7 @@ void AResource_M::BeginPlay()
 {
 	Super::BeginPlay();
 
+	//sets text to the resource name
 	tempText = tempText.FromString(resourceName);
 
 	ResourceNameTxt->SetText(tempText);

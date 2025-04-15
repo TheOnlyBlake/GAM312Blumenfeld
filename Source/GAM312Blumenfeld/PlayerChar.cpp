@@ -18,6 +18,7 @@ APlayerChar::APlayerChar()
 	//turns camera with pawn.
 	PlayerCamComp->bUsePawnControlRotation = true;
 
+	//setup available resources
 	ResourcesArray.SetNum(3);
 	ResourcesNameArray.Add(TEXT("Wood"));
 	ResourcesNameArray.Add(TEXT("Stone"));
@@ -85,40 +86,51 @@ void APlayerChar::StopJump()
 
 void APlayerChar::FindObject()
 {
+	//setup line trace components
 	FHitResult HitResult;
 	FVector StartLocation = PlayerCamComp->GetComponentLocation();
 	FVector Direction = PlayerCamComp->GetForwardVector() * 800.0f;
 	FVector EndLocation = StartLocation + Direction;
 
+	//setup query parameters for line trace
 	FCollisionQueryParams QueryParams;
 	QueryParams.AddIgnoredActor(this);
 	QueryParams.bTraceComplex = true;
 	QueryParams.bReturnFaceIndex = true;
 
+	//makes sure the line trace hits a resource so the editor does not crash
 	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, QueryParams))
 	{
 		AResource_M* HitResource = Cast<AResource_M>(HitResult.GetActor());
 
+		//makes sure the player has more than 5 stamina to harvest resource
 		if (Stamina > 5.0f)
 		{
 			if (HitResource)
 			{
+				//gets the name and amount of the resource
 				FString hitName = HitResource->resourceName;
 				int resourceValue = HitResource->resourceAmount;
 
+				//depletes the harvested amount from the total amount available from the resource
 				HitResource->totalResource = HitResource->totalResource - resourceValue;
 
+				//checks if the resource is fully depleted
 				if (HitResource->totalResource > resourceValue)
 				{
+					//adds resource to player inventory
 					GiveResource(resourceValue, hitName);
 
 					check(GEngine != nullptr);
 					GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Resource Collected"));
 
+					//spawns decal on the resource actor
 					UGameplayStatics::SpawnDecalAtLocation(GetWorld(), hitDecal, FVector(10.0f, 10.0f, 10.0f), HitResult.Location, FRotator(-90, 0, 0), 2.0f);
 
+					//uses stamina
 					SetStamina(-5.0f);
 				}
+				//if resource is depleted, the actor is destroyed
 				else
 				{
 					HitResource->Destroy();
@@ -171,6 +183,7 @@ void APlayerChar::DecreaseStats()
 	}
 }
 
+//adds resources to player inventory array
 void APlayerChar::GiveResource(float amount, FString resourceType)
 {
 	if (resourceType == "Wood")

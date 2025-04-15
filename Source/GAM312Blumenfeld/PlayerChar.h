@@ -49,6 +49,7 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* PlayerCamComp;
 
+	//player stats
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
 	float Health = 100.0f;
 
@@ -58,6 +59,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
 	float Stamina = 100.0f;
 
+	//resources
 	UPROPERTY(EditAnywhere, Category = "Resources")
 	int Wood;
 
@@ -73,6 +75,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Resources")
 	TArray<FString> ResourcesNameArray;
 
+	//hit decal
 	UPROPERTY(EditAnywhere, Category = "HitMarker")
 	UMaterialInterface* hitDecal;
 
