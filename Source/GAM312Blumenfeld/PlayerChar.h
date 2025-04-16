@@ -93,6 +93,8 @@ public:
 	UPROPERTY()
 	ABuildingPart* spawnedPart;
 
+
+	//functions
 	UFUNCTION(BlueprintCallable)
 	void SetHealth(float amount);
 

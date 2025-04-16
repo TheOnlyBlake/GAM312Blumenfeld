@@ -223,6 +223,7 @@ void APlayerChar::GiveResource(float amount, FString resourceType)
 	}
 }
 
+//Updates the resources based on what building part is being crafted
 void APlayerChar::UpdateResources(float woodAmount, float stoneAmount, FString buildingObject)
 {
 	if (woodAmount <= ResourcesArray[0])
@@ -250,6 +251,8 @@ void APlayerChar::UpdateResources(float woodAmount, float stoneAmount, FString b
 	}
 }
 
+
+//spawns the building part where the player is looking
 void APlayerChar::SpawnBuilding(int buildingID, bool& isSuccess)
 {
 	if (!isBuilding)
@@ -274,6 +277,7 @@ void APlayerChar::SpawnBuilding(int buildingID, bool& isSuccess)
 	}
 }
 
+//rotates the building part
 void APlayerChar::RotateBuilding()
 {
 	if (isBuilding)
