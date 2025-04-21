@@ -18,6 +18,18 @@ APlayerChar::APlayerChar()
 	//turns camera with pawn.
 	PlayerCamComp->bUsePawnControlRotation = true;
 
+	//Camera Use
+	/*
+		Camera Libraries are used to handle the common uses for camera in gaming. They offer essentially presets for camera following, different setups such as a 3D or 2D camera, diffferent aspect ratios,
+		and stuff like Screen-to-World Transformation where the screen coordinates are translated into world coordinates and vice versa to allow world interactions. 
+	*/
+
+	//Linear Algebra
+	/*
+		Linear Algebra is pretty much used for everything when it comes to games. Linear algebra is used in 3D graphics and rendering, cameras, animations, AI and AI navigation, lighting and shadows, and vector calculations. It is also used for transforming different objects
+		that you might want to rotate, or move, or scale. Most game engines do a lot of these calculations under the hood, so that way you can focus more on creating your game, but by understanding how it works can allow greater customization for your game.
+	*/
+
 	//setup arrays
 	BuildingArray.SetNum(3);
 	ResourcesArray.SetNum(3);
@@ -112,6 +124,14 @@ void APlayerChar::FindObject()
 	FVector StartLocation = PlayerCamComp->GetComponentLocation();
 	FVector Direction = PlayerCamComp->GetForwardVector() * 800.0f;
 	FVector EndLocation = StartLocation + Direction;
+
+	//Trace/Collision
+	/*
+		Traces and collision are important in gaming. Traces are primarily used for interacting with various objects in the world. They are usually used to check if a player is looking at a specific object and then doing something based on the result.
+		An example of this might be an attacking system. The player could attack, and a trace would be drawn and if it hits something that takes damage, then damage is dealt. In this game, we use it to check if we are looking at a resource. If we are,
+		then we harvest it. If not, then nothing happens. Collisions are also important for the physics of a game. Mostly everything has a collision, from the ground, to the player, to most objects in a world. This helps set defined boundries for the player.
+		If nothing had collisions, it would be very difficult to simulate things like gravity or any kind of physics.
+	*/
 
 	//setup query parameters for line trace
 	FCollisionQueryParams QueryParams;
