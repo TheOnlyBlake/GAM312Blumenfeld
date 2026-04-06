@@ -169,10 +169,11 @@ void APlayerChar::FindObject()
 						objWidget->UpdatematOBJ(matsCollected);
 
 						check(GEngine != nullptr);
-						GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Resource Collected"));
+						FString DebugMsg = FString::Printf(TEXT("+%d %s"), resourceValue, *hitName);
+						GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, DebugMsg);
 
 						//spawns decal on the resource actor
-						UGameplayStatics::SpawnDecalAtLocation(GetWorld(), hitDecal, FVector(10.0f, 10.0f, 10.0f), HitResult.Location, FRotator(-90, 0, 0), 2.0f);
+						//UGameplayStatics::SpawnDecalAtLocation(GetWorld(), hitDecal, FVector(10.0f, 10.0f, 10.0f), HitResult.Location, FRotator(-90, 0, 0), 2.0f);
 
 						//uses stamina
 						SetStamina(-5.0f);
